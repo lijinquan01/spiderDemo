@@ -1,5 +1,0 @@
-public void downloadDoc(String url,String name){
-URL httpUrl = new URL(url);
-File file = new File("D:/");
-FileUtil.copyURLToFile(httpUrl,new File(file+"//"+name));
-}
