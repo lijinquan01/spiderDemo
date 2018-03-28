@@ -8,6 +8,10 @@
     <artifactId>spiderDemo</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <log4j.version>1.2.16</log4j.version>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -20,7 +24,7 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -45,6 +49,11 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
     </dependencies>
 
