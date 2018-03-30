@@ -2,7 +2,7 @@ package com.spider.domain;
 
 /**
  * <p>
- * 一句话描述
+ * 书封装实体
  * <p>
  *
  * @author 2018/3/28 0028
