@@ -7,9 +7,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.log4j.BasicConfigurator;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -48,6 +53,26 @@ public class JsoupSpider
 					+ "bookName:" + jd.getBookName());
 		}
 		//将抓取的数据插入数据库
-		SQLUtils.bantchInsert(bookdatas);
+		//SQLUtils.bantchInsert(bookdatas);
+
+		//mybatis配置文件
+		String rescource = "Mybatis.xml";
+		//穿件文件流
+		InputStream is = null;
+		try
+		{
+			is = Resources.getResourceAsStream(rescource);
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		//创建会话工厂
+		SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
+		//打开会话
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		//插入数据
+		sqlSession.insert("test.insertBookFromJD", bookdatas);
+		//关闭会话
+		sqlSession.close();
 	}
 }

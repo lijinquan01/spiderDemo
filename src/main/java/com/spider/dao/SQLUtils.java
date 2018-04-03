@@ -2,8 +2,13 @@ package com.spider.dao;
 
 import com.spider.domain.Book;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -39,4 +44,6 @@ public class SQLUtils
 		}
 		System.out.print("导入了" + books.size() + "条数据");
 	}
+
+
 }

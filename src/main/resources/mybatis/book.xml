@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="test">
+    <resultMap id="bookResultMap" type="Book">
+        <result property="bookName" column="book_name" jdbcType="VARCHAR"/>
+        <result property="bookId" column="book_id" jdbcType="VARCHAR"/>
+        <result property="bookPrice" column="book_price" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!-- resultType：指定sql输出结果 的所映射的java对象类型，select指定resultType表示将单条记录映射成的java对象。 -->
+    <!--<select id="findBookById" parameterType="int" resultType="map">
+        SELECT book_name,book_id,book_price FROM jd_book WHERE id=#{value}
+    </select>-->
+    <select id="findBookById" parameterType="int" resultMap="bookResultMap">
+        SELECT book_name,book_id,book_price FROM jd_book WHERE id=#{value}
+    </select>
+    <insert id="insertBookFromJD" parameterType="java.util.List">
+        INSERT INTO jd_book(
+        book_name,book_id,book_price
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index"
+                 separator=",">
+            (#{bookName,jdbcType=VARCHAR},
+            #{bookId,jdbcType=VARCHAR},
+            #{bookPrice,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+</mapper>
